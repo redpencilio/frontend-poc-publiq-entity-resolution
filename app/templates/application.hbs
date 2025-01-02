@@ -1,7 +1,5 @@
 {{page-title "Entity Resolution PoC | Publiq"}}
 
-{{outlet}}
-
 <BsNavbar @type="dark" @backgroundColor="primary" as |navbar|>
   <LinkTo @route="index" class="navbar-brand">Publiq Entity Resolution PoC</LinkTo>
   <navbar.toggle />
@@ -13,8 +11,18 @@
       <nav.item>
         <nav.link-to @route="sparql">SPARQL</nav.link-to>
       </nav.item>
+    {{#if this.session.isAuthenticated}}
+      <BsButton
+        @type="primary"
+        {{on "click" this.logout}}
+      >
+        logout
+      </BsButton>
+    {{/if}}
     </navbar.nav>
   </navbar.content>
 </BsNavbar>
+
+{{outlet}}
 
 <div id="ember-bootstrap-wormhole"></div>
