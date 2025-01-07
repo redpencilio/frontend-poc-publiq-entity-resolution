@@ -1,0 +1,24 @@
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">address</th>
+      <th scope="col">postcode</th>
+      <th scope="col">city</th>
+      <th scope="col">street</th>
+      <th scope="col">country</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.addressData as |data|}}
+      <tr>
+        <td>{{data.label}}</td>
+        <td class={{this.equalPropClass "address"}}> {{data.address.address}}</td>
+        <td class={{this.equalPropClass "postcode"}}> {{data.address.postcode}}</td>
+        <td class={{this.equalPropClass "city"}}> {{data.address.city}}</td>
+        <td class={{this.equalPropClass "street"}}> {{data.address.street}}</td>
+        <td class={{this.equalPropClass "country"}}> {{data.address.country}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
