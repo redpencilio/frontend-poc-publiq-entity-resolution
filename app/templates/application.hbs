@@ -1,20 +1,29 @@
 {{page-title "Entity Resolution PoC | Publiq"}}
-
-{{outlet}}
-
 <BsNavbar @type="dark" @backgroundColor="primary" as |navbar|>
-  <LinkTo @route="index" class="navbar-brand">Publiq Entity Resolution PoC</LinkTo>
-  <navbar.toggle />
-  <navbar.content>
-    <navbar.nav as |nav|>
-      <nav.item>
-        <nav.link-to @route="index">Home</nav.link-to>
-      </nav.item>
-      <nav.item>
-        <nav.link-to @route="sparql">SPARQL</nav.link-to>
-      </nav.item>
-    </navbar.nav>
-  </navbar.content>
+  <LinkTo @route="index" class="navbar-brand">
+    Publiq Entity Resolution PoC
+  </LinkTo>
+  {{#if this.session.isAuthenticated}}
+    <navbar.content>
+      <navbar.nav as |nav|>
+        <nav.item>
+          <nav.link-to @route="index">
+            Home
+          </nav.link-to>
+        </nav.item>
+        <nav.item>
+          <nav.link-to @route="sparql">
+            SPARQL
+          </nav.link-to>
+        </nav.item>
+      </navbar.nav>
+    </navbar.content>
+    <MuLogout>
+      logout
+    </MuLogout>
+    <navbar.toggle />
+  {{/if}}
 </BsNavbar>
+{{outlet}}
 
 <div id="ember-bootstrap-wormhole"></div>
