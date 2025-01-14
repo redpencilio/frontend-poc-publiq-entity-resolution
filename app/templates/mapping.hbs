@@ -4,12 +4,17 @@
       @left={{hash label=@model.mapping.objectLabel address=this.leftAddress}}
       @right={{hash label=@model.mapping.subjectLabel address=this.rightAddress}}
     />
-    <BsButton class="btn btn-success" {{on "click" this.accept}}>
-      approve match
-    </BsButton>
-    <BsButton class="btn btn-warning" {{on "click" this.decline}}>
-      decline match
-    </BsButton>
+    <div>
+      <BsButton @type="success" @onClick={{this.confirmExactMatch}} class="mr-2">
+        Exact match
+      </BsButton>
+      <BsButton @type="warning" @onClick={{this.confirmRelatedMatch}} class="mx-2">
+        Related match
+      </BsButton>
+      <BsButton @type="danger" @onClick={{this.declineMatch}} class="ml-2">
+        Decline match
+      </BsButton>
+    </div>
   {{else}}
     <div class="mt-5">
       <BsAlert @type="success" @dismissible={{false}}>

@@ -21,22 +21,29 @@ export default class MappingController extends Controller {
     return this.model?.mapping;
   }
 
-  accept = async () => {
-    await this.createDuplicateMapping(
+  confirmExactMatch = async () => {
+    await this.createManualMapping(
       'http://www.w3.org/2004/02/skos/core#exactMatch',
     );
     this.router.refresh(this.router.currentRouteName);
   };
 
-  decline = async () => {
+  confirmRelatedMatch = async () => {
+    await this.createManualMapping(
+      'http://www.w3.org/2004/02/skos/core#relatedMatch',
+    );
+    this.router.refresh(this.router.currentRouteName);
+  };
+
+  declineMatch = async () => {
     // todo: this is not a real skos predicate!
-    await this.createDuplicateMapping(
+    await this.createManualMapping(
       'http://www.w3.org/2004/02/skos/core#noMatch',
     );
     this.router.refresh(this.router.currentRouteName);
   };
 
-  async createDuplicateMapping(matchPredicate) {
+  async createManualMapping(matchPredicate) {
     const { justification, subjectLabel, objectLabel, subject, object } =
       this.model.mapping;
     const newMapping = this.store.createRecord('mapping', {
