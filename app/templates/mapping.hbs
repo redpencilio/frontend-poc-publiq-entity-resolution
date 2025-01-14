@@ -26,6 +26,10 @@
       decline match
     </BsButton>
   {{else}}
-    - no more mappings -
+    <div class="mt-5">
+      <BsAlert @type="success" @dismissible={{false}}>
+        <strong>Well done!</strong> All mappings are verified.
+      </BsAlert>
+    </div>
   {{/if}}
 </div>

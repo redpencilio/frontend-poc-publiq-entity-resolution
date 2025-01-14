@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { isPresent } from '@ember/utils';
 import { service } from '@ember/service';
 
 export default class MappingController extends Controller {
@@ -6,14 +7,14 @@ export default class MappingController extends Controller {
   @service router;
 
   get isLocation() {
-    return 'locationA' in this.model;
+    return isPresent(this.model?.locationA);
   }
   get isAddress() {
-    return 'AddressA' in this.model;
+    return isPresent(this.model?.addressA);
   }
 
   get mapping() {
-    return this.model.mapping;
+    return this.model?.mapping;
   }
 
   accept = async () => {
