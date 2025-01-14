@@ -1,10 +1,8 @@
 <div class="container">
   {{#if @model}}
     <AddressComparisonTable
-      @labelA={{@model.mapping.objectLabel}}
-      @labelB={{@model.mapping.subjectLabel}}
-      @addressA={{this.leftAddress}}
-      @addressB={{this.rightAddress}}
+      @left={{hash label=@model.mapping.objectLabel address=this.leftAddress}}
+      @right={{hash label=@model.mapping.subjectLabel address=this.rightAddress}}
     />
     <BsButton class="btn btn-success" {{on "click" this.accept}}>
       approve match

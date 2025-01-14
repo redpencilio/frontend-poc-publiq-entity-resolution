@@ -6,20 +6,14 @@ export default class AddressComparisonTableComponent extends Component {
 
   isEqualProp(propName) {
     const equalProp =
-      this.args.addressA.get(propName) === this.args.addressB.get(propName);
+      this.args.left.address.get(propName) ===
+      this.args.right.address.get(propName);
     const equalContent =
-      this.args.addressA.get(propName)?.content ===
-      this.args.addressB.get(propName)?.content;
+      this.args.left.address.get(propName)?.content ===
+      this.args.right.address.get(propName)?.content;
     const notNull =
-      this.args.addressA.get(propName) != null &&
-      this.args.addressB.get(propName) != null;
+      this.args.left.address.get(propName) != null &&
+      this.args.right.address.get(propName) != null;
     return equalProp || (equalContent && notNull);
-  }
-
-  get addressData() {
-    return [
-      { label: this.args.labelA, address: this.args.addressA },
-      { label: this.args.labelB, address: this.args.addressB },
-    ];
   }
 }
