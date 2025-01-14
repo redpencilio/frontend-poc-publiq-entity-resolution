@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 
 export default class AddressComparisonTableComponent extends Component {
   equalPropClass = (propName) =>
-    this.isEqualProp(propName) ? 'text-muted' : 'bg-gray-200';
+    this.isEqualProp(propName) ? 'text-muted' : 'bg-danger-light';
 
   isEqualProp(propName) {
     const equalProp =

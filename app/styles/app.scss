@@ -4,3 +4,8 @@ $primary: $cyan;
 $info: $blue;
 
 @import "node_modules/bootstrap/scss/bootstrap";
+
+.table td.bg-danger-light,
+.bg-danger-light {
+  background-color:#fef2f2;
+}
