@@ -1,16 +1,20 @@
 import Controller from '@ember/controller';
-import { isPresent } from '@ember/utils';
 import { service } from '@ember/service';
 
 export default class MappingController extends Controller {
   @service store;
   @service router;
 
-  get isLocation() {
-    return isPresent(this.model?.locationA);
+  get leftAddress() {
+    return this.model?.type == 'location'
+      ? this.model.left.address
+      : this.model.left;
   }
-  get isAddress() {
-    return isPresent(this.model?.addressA);
+
+  get rightAddress() {
+    return this.model?.type == 'location'
+      ? this.model.right.address
+      : this.model.right;
   }
 
   get mapping() {
@@ -32,15 +36,17 @@ export default class MappingController extends Controller {
     this.router.refresh(this.router.currentRouteName);
   };
 
-  async createDuplicateMapping(predicateType) {
+  async createDuplicateMapping(matchPredicate) {
+    const { justification, subjectLabel, objectLabel, subject, object } =
+      this.model.mapping;
     const newMapping = this.store.createRecord('mapping', {
-      justification: this.mapping.justification,
-      subjectLabel: this.mapping.subjectLabel,
-      objectLabel: this.mapping.objectLabel,
-      subject: this.mapping.subject,
-      object: this.mapping.object,
-      predicate: predicateType,
-      derivedFrom: this.mapping,
+      justification,
+      subjectLabel,
+      objectLabel,
+      subject,
+      object,
+      predicate: matchPredicate,
+      derivedFrom: this.model.mapping,
     });
     await newMapping.save();
   }

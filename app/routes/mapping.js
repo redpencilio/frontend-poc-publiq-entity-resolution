@@ -15,16 +15,16 @@ export default class MappingRoute extends Route {
     if (mapping) {
       const object = mapping.object;
       const subject = mapping.subject;
-      const addressA = await this.store.findRecordByUri('address', object);
-      if (addressA) {
+      const left = await this.store.findRecordByUri('address', object);
+      if (left) {
         // is a mapping for addresses
-        const addressB = await this.store.findRecordByUri('address', subject);
-        return { mapping, addressA, addressB };
+        const right = await this.store.findRecordByUri('address', subject);
+        return { mapping, type: 'address', left, right };
       } else {
         // is a mapping of locations
-        const locationA = await this.store.findRecordByUri('location', object);
-        const locationB = await this.store.findRecordByUri('location', subject);
-        return { mapping, locationA, locationB };
+        const left = await this.store.findRecordByUri('location', object);
+        const right = await this.store.findRecordByUri('location', subject);
+        return { mapping, type: 'location', left, right };
       }
     } else {
       return null;

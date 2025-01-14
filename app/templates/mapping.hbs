@@ -1,23 +1,10 @@
 <div class="container">
-  {{#if this.isAddress}}
+  {{#if @model}}
     <AddressComparisonTable
       @labelA={{@model.mapping.objectLabel}}
       @labelB={{@model.mapping.subjectLabel}}
-      @addressA={{@model.addressA}}
-      @addressB={{@model.addressB}}
-    />
-    <BsButton class="btn btn-success" {{on "click" this.accept}}>
-      approve match
-    </BsButton>
-    <BsButton class="btn btn-warning" {{on "click" this.decline}}>
-      decline match
-    </BsButton>
-  {{else if this.isLocation}}
-    <AddressComparisonTable
-      @labelA={{@model.mapping.objectLabel}}
-      @labelB={{@model.mapping.subjectLabel}}
-      @addressA={{@model.locationA.address}}
-      @addressB={{@model.locationB.address}}
+      @addressA={{this.leftAddress}}
+      @addressB={{this.rightAddress}}
     />
     <BsButton class="btn btn-success" {{on "click" this.accept}}>
       approve match
