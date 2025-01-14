@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { service } from '@ember/service';
 
-export default class MappingController extends Controller {
+export default class MappingsNextController extends Controller {
   @service store;
   @service router;
 

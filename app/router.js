@@ -9,5 +9,9 @@ export default class Router extends EmberRouter {
 Router.map(function () {
   this.route('login');
   this.route('sparql');
-  this.route('mapping');
+  this.route('mappings', function () {
+    this.route('open');
+    this.route('next');
+    this.route('done');
+  });
 });
