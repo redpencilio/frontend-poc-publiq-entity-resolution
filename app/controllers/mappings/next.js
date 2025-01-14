@@ -1,5 +1,8 @@
 import Controller from '@ember/controller';
 import { service } from '@ember/service';
+import constants from '../../constants';
+
+const { MAPPING_PREDICATES } = constants;
 
 export default class MappingsNextController extends Controller {
   @service store;
@@ -22,24 +25,17 @@ export default class MappingsNextController extends Controller {
   }
 
   confirmExactMatch = async () => {
-    await this.createManualMapping(
-      'http://www.w3.org/2004/02/skos/core#exactMatch',
-    );
+    await this.createManualMapping(MAPPING_PREDICATES.EXACT);
     this.router.refresh(this.router.currentRouteName);
   };
 
   confirmRelatedMatch = async () => {
-    await this.createManualMapping(
-      'http://www.w3.org/2004/02/skos/core#relatedMatch',
-    );
+    await this.createManualMapping(MAPPING_PREDICATES.RELATED);
     this.router.refresh(this.router.currentRouteName);
   };
 
   declineMatch = async () => {
-    // todo: this is not a real skos predicate!
-    await this.createManualMapping(
-      'http://www.w3.org/2004/02/skos/core#noMatch',
-    );
+    await this.createManualMapping(MAPPING_PREDICATES.NONE);
     this.router.refresh(this.router.currentRouteName);
   };
 
