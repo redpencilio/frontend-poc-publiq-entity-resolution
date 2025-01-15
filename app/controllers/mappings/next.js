@@ -27,12 +27,21 @@ export default class MappingsNextController extends Controller {
   };
 
   async createManualMapping(matchPredicate) {
-    const { subjectLabel, objectLabel, subject, object } = this.model.mapping;
+    const {
+      subjectLabel,
+      objectLabel,
+      subject,
+      object,
+      subjectType,
+      objectType,
+    } = this.model.mapping;
     const newMapping = this.store.createRecord('mapping', {
       subjectLabel,
       objectLabel,
       subject,
       object,
+      subjectType,
+      objectType,
       comment: this.mappingComment,
       justification: MAPPING_JUSTIFICATIONS.MANUAL,
       predicate: matchPredicate,
