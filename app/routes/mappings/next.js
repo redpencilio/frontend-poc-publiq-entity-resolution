@@ -31,4 +31,9 @@ export default class MappingsNextRoute extends Route {
       return null;
     }
   }
+
+  setupController(controller) {
+    super.setupController(...arguments);
+    controller.mappingComment = null;
+  }
 }

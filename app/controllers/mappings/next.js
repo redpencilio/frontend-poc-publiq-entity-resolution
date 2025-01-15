@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 import constants from '../../constants';
 
 const { MAPPING_PREDICATES, MAPPING_JUSTIFICATIONS } = constants;
@@ -7,6 +8,8 @@ const { MAPPING_PREDICATES, MAPPING_JUSTIFICATIONS } = constants;
 export default class MappingsNextController extends Controller {
   @service store;
   @service router;
+
+  @tracked mappingComment;
 
   get leftAddress() {
     return this.model?.type == 'location'
@@ -46,6 +49,7 @@ export default class MappingsNextController extends Controller {
       objectLabel,
       subject,
       object,
+      comment: this.mappingComment,
       justification: MAPPING_JUSTIFICATIONS.MANUAL,
       predicate: matchPredicate,
       derivedFrom: this.model.mapping,

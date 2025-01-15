@@ -12,6 +12,7 @@ export default class MappingModel extends Model {
   @attr('string') subject;
   @attr('string') object;
   @attr('string') predicate; // uri (like "http://www.w3.org/2004/02/skos/core#exactMatch")
+  @attr('string') comment;
 
   @belongsTo('mapping', { async: true, inverse: 'derivedFrom' }) hasDerivation;
   @belongsTo('mapping', { async: true, inverse: 'hasDerivation' }) derivedFrom;

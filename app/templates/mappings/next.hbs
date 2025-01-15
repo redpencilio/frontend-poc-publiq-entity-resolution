@@ -3,7 +3,17 @@
     @left={{hash label=@model.mapping.objectLabel address=this.leftAddress}}
     @right={{hash label=@model.mapping.subjectLabel address=this.rightAddress}}
   />
-  <div>
+  <form>
+    <div class="form-group">
+      <label for="mapping-comment">Notitie bij mapping</label>
+      <Textarea
+        id="mapping-comment"
+        @value={{this.mappingComment}}
+        rows="3"
+        class="form-control" />
+    </div>
+  </form>
+  <div class="mt-2">
     <BsButton @type="success" @onClick={{this.confirmExactMatch}} class="mr-2">
       Exact match
     </BsButton>
