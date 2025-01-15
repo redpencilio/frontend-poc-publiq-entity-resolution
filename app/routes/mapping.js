@@ -6,6 +6,7 @@ export default class MappingRoute extends Route {
 
   async model() {
     const mapping = await this.store.queryOne('mapping', {
+      sort: '-derived-from.score',
       filter: {
         ':has-no:predicate': true,
         ':has-no:has-derivation': true,
