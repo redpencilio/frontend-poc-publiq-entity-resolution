@@ -1,0 +1,21 @@
+<div class="mt-5 row justify-content-center">
+  <form class="col-4 row gap-2" {{on "submit" this.login}}>
+    <div class="form-group col-12">
+      <Input
+        id="mu-login-username"
+        @value={{this.nickname}}
+        placeholder="Username"
+        class="form-control rounded-left" />
+    </div>
+    <div class="form-group col-12">
+      <Input
+        @type="password"
+        @value={{this.password}}
+        class="form-control rounded-left"
+        placeholder="Password" />
+    </div>
+    <div class="mt-2 form-group col-12 d-grid">
+      <BsButton type="submit" @type="primary" class="">Log in</BsButton>
+    </div>
+  </form>
+</div>
