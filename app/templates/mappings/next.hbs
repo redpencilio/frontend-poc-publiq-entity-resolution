@@ -1,3 +1,8 @@
+<div class="d-flex gap-2 align-items-center">
+  <h2>Proposed mapping</h2>
+  <div class="badge bg-primary">Score: {{@model.mapping.score}}</div>
+</div>
+
 {{#if @model}}
   <AddressComparisonTable
     @left={{hash label=@model.mapping.objectLabel address=@model.left.address}}
