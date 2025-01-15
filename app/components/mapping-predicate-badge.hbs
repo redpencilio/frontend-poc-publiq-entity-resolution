@@ -1,0 +1,7 @@
+{{#if (eq @predicate (app-constant "MAPPING_PREDICATES.EXACT"))}}
+  <span class="badge bg-success">Exact</span>
+{{else if (eq @predicate (app-constant "MAPPING_PREDICATES.RELATED"))}}
+  <span class="badge bg-warning">Related</span>
+{{else}}
+  <span class="badge bg-danger">No match</span>
+{{/if}}
