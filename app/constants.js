@@ -1,4 +1,7 @@
 export default {
+  ENTITY_TYPES: {
+    LOCATION: 'http://purl.org/dc/terms/Location',
+  },
   MAPPING_PREDICATES: {
     EXACT: 'http://www.w3.org/2004/02/skos/core#exactMatch',
     RELATED: 'http://www.w3.org/2004/02/skos/core#relatedMatch',

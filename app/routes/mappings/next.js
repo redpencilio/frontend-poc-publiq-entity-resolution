@@ -1,5 +1,8 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import constants from '../../constants';
+
+const { ENTITY_TYPES } = constants;
 
 export default class MappingsNextRoute extends Route {
   @service store;
@@ -8,25 +11,25 @@ export default class MappingsNextRoute extends Route {
     const mapping = await this.store.queryOne('mapping', {
       sort: '-score',
       filter: {
+        'subject-type': ENTITY_TYPES.LOCATION,
+        'object-type': ENTITY_TYPES.LOCATION,
         ':has-no:predicate': true,
         ':has-no:has-derivation': true,
         ':has-no:derived-from': true,
       },
     });
     if (mapping) {
-      const object = mapping.object;
-      const subject = mapping.subject;
-      const left = await this.store.findRecordByUri('address', object);
-      if (left) {
-        // is a mapping for addresses
-        const right = await this.store.findRecordByUri('address', subject);
-        return { mapping, type: 'address', left, right };
-      } else {
-        // is a mapping of locations
-        const left = await this.store.findRecordByUri('location', object);
-        const right = await this.store.findRecordByUri('location', subject);
-        return { mapping, type: 'location', left, right };
-      }
+      const [left, right] = await Promise.all([
+        this.store.queryOne('location', {
+          'filter[:uri:]': mapping.object,
+          include: 'address',
+        }),
+        this.store.queryOne('location', {
+          'filter[:uri:]': mapping.subject,
+          include: 'address',
+        }),
+      ]);
+      return { mapping, left, right };
     } else {
       return null;
     }

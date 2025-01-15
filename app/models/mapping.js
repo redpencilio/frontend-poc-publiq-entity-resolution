@@ -11,6 +11,8 @@ export default class MappingModel extends Model {
   // uri to either a location or address
   @attr('string') subject;
   @attr('string') object;
+  @attr('string') subjectType;
+  @attr('string') objectType;
   @attr('string') predicate; // uri (like "http://www.w3.org/2004/02/skos/core#exactMatch")
   @attr('string') comment;
 

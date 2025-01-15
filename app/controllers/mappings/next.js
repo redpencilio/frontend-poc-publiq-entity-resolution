@@ -11,22 +11,6 @@ export default class MappingsNextController extends Controller {
 
   @tracked mappingComment;
 
-  get leftAddress() {
-    return this.model?.type == 'location'
-      ? this.model.left.address
-      : this.model.left;
-  }
-
-  get rightAddress() {
-    return this.model?.type == 'location'
-      ? this.model.right.address
-      : this.model.right;
-  }
-
-  get mapping() {
-    return this.model?.mapping;
-  }
-
   confirmExactMatch = async () => {
     await this.createManualMapping(MAPPING_PREDICATES.EXACT);
     this.router.refresh(this.router.currentRouteName);
