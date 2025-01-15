@@ -3,4 +3,5 @@ import { service } from '@ember/service';
 
 export default class ApplicationController extends Controller {
   @service session;
+  @service currentSession;
 }
