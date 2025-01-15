@@ -1,7 +1,7 @@
 <table class="table table-sm">
   <thead>
     <tr>
-      <th scope="col"></th>
+      <th scope="col">Locatie</th>
       <th scope="col">Address</th>
       <th scope="col">Postcode</th>
       <th scope="col">City</th>
@@ -12,12 +12,12 @@
   <tbody>
     {{#each (array @left @right) as |record|}}
       <tr>
-        <td>{{record.label}}</td>
-        <td class={{this.equalPropClass "address"}}> {{record.address.address}}</td>
-        <td class={{this.equalPropClass "postcode"}}> {{record.address.postcode}}</td>
-        <td class={{this.equalPropClass "city"}}> {{record.address.city}}</td>
-        <td class={{this.equalPropClass "street"}}> {{record.address.street}}</td>
-        <td class={{this.equalPropClass "country"}}> {{record.address.country}}</td>
+        <td class={{this.equalPropClass "label"}}>{{record.label}}</td>
+        <td class={{this.equalPropClass "address.address"}}> {{record.address.address}}</td>
+        <td class={{this.equalPropClass "address.postcode"}}> {{record.address.postcode}}</td>
+        <td class={{this.equalPropClass "address.city"}}> {{record.address.city}}</td>
+        <td class={{this.equalPropClass "address.street"}}> {{record.address.street}}</td>
+        <td class={{this.equalPropClass "address.country"}}> {{record.address.country}}</td>
       </tr>
     {{/each}}
   </tbody>

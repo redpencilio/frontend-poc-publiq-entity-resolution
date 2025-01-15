@@ -1,4 +1,5 @@
 import Component from '@glimmer/component';
+import { get } from '@ember/object';
 
 export default class AddressComparisonTableComponent extends Component {
   equalPropClass = (propName) =>
@@ -6,14 +7,12 @@ export default class AddressComparisonTableComponent extends Component {
 
   isEqualProp(propName) {
     const equalProp =
-      this.args.left.address.get(propName) ===
-      this.args.right.address.get(propName);
+      get(this.args.left, propName) != null &&
+      get(this.args.left, propName) === get(this.args.right, propName);
     const equalContent =
-      this.args.left.address.get(propName)?.content ===
-      this.args.right.address.get(propName)?.content;
-    const notNull =
-      this.args.left.address.get(propName) != null &&
-      this.args.right.address.get(propName) != null;
-    return equalProp || (equalContent && notNull);
+      get(this.args.left, propName)?.content != null &&
+      get(this.args.left, propName)?.content ===
+        get(this.args.right, propName)?.content;
+    return equalProp || equalContent;
   }
 }
