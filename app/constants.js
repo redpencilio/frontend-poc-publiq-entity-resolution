@@ -5,4 +5,8 @@ export default {
     // todo: this is not a real skos predicate!
     NONE: 'http://mu.semte.ch/vocabularies/ext/noMatch',
   },
+  MAPPING_JUSTIFICATIONS: {
+    MANUAL: 'https://w3id.org/semapv/vocab/ManualMappingCuration',
+    COMPOSITE: 'https://w3id.org/semapv/vocab/CompositeMatching',
+  },
 };

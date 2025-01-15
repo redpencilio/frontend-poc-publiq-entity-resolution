@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { service } from '@ember/service';
 import constants from '../../constants';
 
-const { MAPPING_PREDICATES } = constants;
+const { MAPPING_PREDICATES, MAPPING_JUSTIFICATIONS } = constants;
 
 export default class MappingsNextController extends Controller {
   @service store;
@@ -40,14 +40,13 @@ export default class MappingsNextController extends Controller {
   };
 
   async createManualMapping(matchPredicate) {
-    const { justification, subjectLabel, objectLabel, subject, object } =
-      this.model.mapping;
+    const { subjectLabel, objectLabel, subject, object } = this.model.mapping;
     const newMapping = this.store.createRecord('mapping', {
-      justification,
       subjectLabel,
       objectLabel,
       subject,
       object,
+      justification: MAPPING_JUSTIFICATIONS.MANUAL,
       predicate: matchPredicate,
       derivedFrom: this.model.mapping,
     });
