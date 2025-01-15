@@ -1,6 +1,9 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
+import { service } from '@ember/service';
 
 export default class MappingModel extends Model {
+  @service currentSession;
+
   @attr('string') uri;
   @attr('date') created;
   @attr('date') modified;
@@ -16,6 +19,7 @@ export default class MappingModel extends Model {
   @attr('string') predicate; // uri (like "http://www.w3.org/2004/02/skos/core#exactMatch")
   @attr('string') comment;
 
+  @belongsTo('person', { async: true, inverse: 'mappings' }) creator;
   @belongsTo('mapping', { async: true, inverse: 'derivedFrom' }) hasDerivation;
   @belongsTo('mapping', { async: true, inverse: 'hasDerivation' }) derivedFrom;
 
@@ -25,6 +29,7 @@ export default class MappingModel extends Model {
       this.modified = now;
       if (this.isNew) {
         this.created = now;
+        this.creator = this.currentSession.user;
       }
     }
     return super.save(options);
