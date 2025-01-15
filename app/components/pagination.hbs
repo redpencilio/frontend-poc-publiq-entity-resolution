@@ -1,0 +1,49 @@
+<div class="d-flex align-items-center justify-content-between">
+  <div>
+    <p class="small text-muted">
+      <span class="font-medium">{{this.start}}</span>
+      tot
+      <span class="font-medium">{{this.end}}</span>
+      van
+      <span class="font-medium">{{@total}}</span>
+      resultaten
+    </p>
+  </div>
+  <div>
+    {{#if this.hasMultiplePages}}
+      <ul class="pagination">
+        <li class="page-item {{unless this.hasPrevious "disabled"}}">
+          <button type="button"
+            {{on "click" @onPrevious}}
+            class="page-link">
+            Previous
+          </button>
+        </li>
+        {{#each this.pages as |zeroBasedPage|}}
+          {{#let (inc zeroBasedPage 1) as |page|}}
+            {{#if page}}
+              <li class="page-item {{if (eq zeroBasedPage this.page) "active"}}">
+                <button type="button"
+                  {{on "click" (fn @onSelectPage zeroBasedPage)}}
+                  class="page-link">
+                  {{page}}
+                </button>
+              </li>
+            {{else}}
+              <li class="page-item">
+                <button type="button" disabled class="page-link">...</button>
+              </li>
+            {{/if}}
+          {{/let}}
+        {{/each}}
+        <li class="page-item {{unless this.hasNext "disabled"}}">
+          <button type="button"
+            {{on "click" @onNext}}
+            class="page-link">
+            Next
+          </button>
+        </li>
+      </ul>
+    {{/if}}
+  </div>
+</div>

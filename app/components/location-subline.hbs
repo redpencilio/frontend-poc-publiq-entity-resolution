@@ -1,0 +1,6 @@
+{{#if this.location}}
+  {{#let this.location.address as |address|}}
+    <span>{{address.address}}</span><br>
+    <span>{{address.street}}, {{address.postcode}} {{address.city}}, {{address.country}}</span>
+  {{/let}}
+{{/if}}

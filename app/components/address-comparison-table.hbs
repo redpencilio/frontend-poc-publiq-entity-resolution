@@ -13,11 +13,11 @@
     {{#each (array @left @right) as |record|}}
       <tr>
         <td class={{this.equalPropClass "label"}}>{{record.label}}</td>
-        <td class={{this.equalPropClass "address.address"}}> {{record.address.address}}</td>
-        <td class={{this.equalPropClass "address.postcode"}}> {{record.address.postcode}}</td>
-        <td class={{this.equalPropClass "address.city"}}> {{record.address.city}}</td>
-        <td class={{this.equalPropClass "address.street"}}> {{record.address.street}}</td>
-        <td class={{this.equalPropClass "address.country"}}> {{record.address.country}}</td>
+        <td class={{this.equalPropClass "address.address"}}>{{record.address.address}}</td>
+        <td class={{this.equalPropClass "address.postcode"}}>{{record.address.postcode}}</td>
+        <td class={{this.equalPropClass "address.city"}}>{{record.address.city}}</td>
+        <td class={{this.equalPropClass "address.street"}}>{{record.address.street}}</td>
+        <td class={{this.equalPropClass "address.country"}}>{{record.address.country}}</td>
       </tr>
     {{/each}}
   </tbody>
