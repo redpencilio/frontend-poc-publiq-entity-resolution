@@ -15,7 +15,21 @@
         placeholder="Password" />
     </div>
     <div class="mt-2 form-group col-12 d-grid">
-      <BsButton type="submit" @type="primary" class="">Log in</BsButton>
+      {{#if this.errorMessage}}
+        <BsAlert @type="danger" @dismissible={{false}}>
+          <strong>Something went wrong.</strong> {{this.errorMessage}}
+        </BsAlert>
+      {{/if}}
+      <BsButton
+        type="submit"
+        @type="primary"
+        disabled={{this.isAuthenticating}} class="fw-bolder">
+        {{#if this.isAuthenticating}}
+          <BsSpinner @type="light" @size="sm" />
+        {{else}}
+          Login
+        {{/if}}
+      </BsButton>
     </div>
   </form>
 </div>
