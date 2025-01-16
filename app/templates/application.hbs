@@ -8,18 +8,13 @@
     <navbar.content>
       <navbar.nav as |nav|>
         <nav.item>
-          <nav.link-to @route="index">
-            Home
-          </nav.link-to>
-        </nav.item>
-        <nav.item>
-          <nav.link-to @route="sparql">
-            SPARQL
-          </nav.link-to>
-        </nav.item>
-        <nav.item>
           <nav.link-to @route="mappings.next">
-            Mappings
+            Proposed mappings
+          </nav.link-to>
+        </nav.item>
+        <nav.item>
+          <nav.link-to @route="mappings.done">
+            Verified mappings
           </nav.link-to>
         </nav.item>
       </navbar.nav>
