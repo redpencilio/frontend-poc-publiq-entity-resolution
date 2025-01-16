@@ -9,6 +9,13 @@ export default class MappingsDoneController extends Controller {
   @tracked page = 0;
   @tracked size = 50;
   @tracked sort = '-derived-from.score';
+  @tracked matchPredicate;
+
+  @action
+  setMatchPredicate(value) {
+    this.matchPredicate = value;
+    this.page = 0;
+  }
 
   @action
   previousPage() {

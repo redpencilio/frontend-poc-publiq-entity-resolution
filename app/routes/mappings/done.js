@@ -8,9 +8,14 @@ export default class MappingsDoneRoute extends Route {
     page: { refreshModel: true },
     size: { refreshModel: true },
     sort: { refreshModel: true },
+    matchPredicate: { refreshModel: true },
   };
 
   async model(params) {
+    const optionalFilters = {};
+    if (params.matchPredicate) {
+      optionalFilters[':exact:predicate'] = params.matchPredicate;
+    }
     const mappings = await this.store.query('mapping', {
       sort: params.sort,
       page: {
@@ -19,6 +24,7 @@ export default class MappingsDoneRoute extends Route {
       },
       filter: {
         ':has:derived-from': true,
+        ...optionalFilters,
       },
       include: 'derived-from,creator',
     });
