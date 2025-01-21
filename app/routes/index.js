@@ -5,6 +5,6 @@ export default class IndexRoute extends Route {
   @service router;
 
   beforeModel() {
-    this.router.transitionTo('mappings.next');
+    this.router.transitionTo('mappings.proposed');
   }
 }
