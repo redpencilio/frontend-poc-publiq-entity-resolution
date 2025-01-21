@@ -28,7 +28,13 @@ export default class MappingsMappingRoute extends Route {
             include: 'address',
           }),
         ]);
-        return { mapping, left, right };
+        const derivedMapping = await mapping.hasDerivation;
+        return {
+          mapping,
+          left,
+          right,
+          hasMatchPredicate: mapping.predicate || derivedMapping?.predicate,
+        };
       }
     } else {
       return null;
