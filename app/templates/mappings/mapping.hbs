@@ -21,6 +21,11 @@
           <p class="text-muted small">{{verification.comment}}</p>
         </div>
       </div>
+      <div>
+        <BsButton @type="danger" @size="sm" @onClick={{this.resetMatch}}>
+          Reset match
+        </BsButton>
+      </div>
     {{/let}}
   {{else}}
     <form>

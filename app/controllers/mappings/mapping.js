@@ -26,6 +26,12 @@ export default class MappingsMappingController extends Controller {
     this.router.transitionTo('mappings.next');
   };
 
+  resetMatch = async () => {
+    const manualMapping = await this.model.mapping.hasDerivation;
+    await manualMapping.destroyRecord();
+    this.router.refresh(this.router.currentRouteName);
+  };
+
   async createManualMapping(matchPredicate) {
     const {
       subjectLabel,
