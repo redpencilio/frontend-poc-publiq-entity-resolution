@@ -1,19 +1,19 @@
 {{page-title "Entity Resolution PoC | Publiq"}}
 
 <BsNavbar @type="dark" @backgroundColor="primary" as |navbar|>
-  <LinkTo @route="index" class="navbar-brand">
+  <LinkTo @route="index" class="navbar-brand fw-medium">
     Publiq Entity Resolution PoC
   </LinkTo>
   {{#if this.session.isAuthenticated}}
     <navbar.content>
       <navbar.nav as |nav|>
         <nav.item>
-          <nav.link-to @route="mappings.proposed">
+          <nav.link-to @route="mappings.proposed" class="fw-medium">
             Proposed mappings
           </nav.link-to>
         </nav.item>
         <nav.item>
-          <nav.link-to @route="mappings.done">
+          <nav.link-to @route="mappings.done" class="fw-medium">
             Verified mappings
           </nav.link-to>
         </nav.item>
