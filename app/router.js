@@ -14,5 +14,6 @@ Router.map(function () {
     this.route('next');
     this.route('mapping', { path: '/:mapping_id' });
     this.route('done');
+    this.route('auto');
   });
 });
