@@ -10,6 +10,7 @@ export default class MappingsMappingController extends Controller {
   @service router;
 
   @tracked mappingComment;
+  @tracked progress;
 
   confirmExactMatch = async () => {
     await this.createManualMapping(MAPPING_PREDICATES.EXACT);

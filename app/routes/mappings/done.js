@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import constants from '../../constants';
 
-const { MAPPING_JUSTIFICATIONS } = constants;
+const { ENTITY_TYPES, MAPPING_JUSTIFICATIONS } = constants;
 
 export default class MappingsDoneRoute extends Route {
   @service store;
@@ -26,6 +26,8 @@ export default class MappingsDoneRoute extends Route {
         number: params.page,
       },
       filter: {
+        'subject-type': ENTITY_TYPES.LOCATION,
+        'object-type': ENTITY_TYPES.LOCATION,
         ':has:derived-from': true,
         justification: MAPPING_JUSTIFICATIONS.MANUAL,
         ...optionalFilters,

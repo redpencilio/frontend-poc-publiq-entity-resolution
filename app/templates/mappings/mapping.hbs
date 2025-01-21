@@ -1,3 +1,18 @@
+{{#unless @model.mapping.hasDerivation}}
+  <div class="mb-2">
+    <BsProgress as |Progress|>
+      <Progress.bar
+        @value={{this.progress.value}}
+        @minValue={{0}}
+        @maxValue={{this.progress.total}}
+        @showLabel={{true}} />
+    </BsProgress>
+    <div class="text-end small text-muted">
+      {{this.progress.value}}/{{this.progress.total}}
+    </div>
+  </div>
+{{/unless}}
+
 <div class="d-flex gap-2 align-items-center">
   {{#if @model.mapping.hasDerivation}}
     <h2>Mapping</h2>
