@@ -10,7 +10,7 @@ Router.map(function () {
   this.route('login');
   this.route('sparql');
   this.route('mappings', function () {
-    this.route('open');
+    this.route('proposed');
     this.route('next');
     this.route('done');
   });
