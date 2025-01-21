@@ -1,11 +1,13 @@
 {
   "name": "frontend-poc-publiq-entity-resolution",
   "version": "0.1.1",
-  "private": true,
-  "description": "Small description for frontend-poc-publiq-entity-resolution goes here",
-  "repository": "",
+  "description": "Frontend for Publiq's entity resolution PoC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redpencilio/frontend-poc-publiq-entiity-resolution.git"
+  },
   "license": "MIT",
-  "author": "",
+  "author": "redpencil.io",
   "directories": {
     "doc": "doc",
     "test": "tests"
