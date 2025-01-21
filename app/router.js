@@ -12,6 +12,7 @@ Router.map(function () {
   this.route('mappings', function () {
     this.route('proposed');
     this.route('next');
+    this.route('mapping', { path: '/:mapping_id' });
     this.route('done');
   });
 });

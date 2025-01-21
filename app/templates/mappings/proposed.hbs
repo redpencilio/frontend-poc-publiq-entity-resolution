@@ -14,7 +14,7 @@
       <tbody>
         {{#each @model as |mapping|}}
           <tr>
-            <td class="text-center">{{mapping.score}}</td>
+            <td class="align-middle text-center fw-medium">{{mapping.score}}</td>
             <td>
               <span>{{mapping.objectLabel}}</span><br>
               <span class="text-muted small">
@@ -27,7 +27,10 @@
                 <LocationSubline @uri={{mapping.subject}} />
               </span>
             </td>
-            <td>
+            <td class="align-middle small">
+              <LinkTo @route="mappings.mapping" @model={{mapping.id}}>
+                Verifieer
+              </LinkTo>
             </td>
           </tr>
         {{/each}}

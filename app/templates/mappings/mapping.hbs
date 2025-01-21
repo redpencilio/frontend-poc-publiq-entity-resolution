@@ -1,0 +1,54 @@
+<div class="d-flex gap-2 align-items-center">
+  {{#if @model.mapping.hasDerivation}}
+    <h2>Mapping</h2>
+  {{else}}
+    <h2>Proposed mapping</h2>
+  {{/if}}
+  <div class="badge bg-primary">Score: {{@model.mapping.score}}</div>
+</div>
+
+{{#if @model}}
+  <AddressComparisonTable
+    @left={{hash label=@model.mapping.objectLabel address=@model.left.address}}
+    @right={{hash label=@model.mapping.subjectLabel address=@model.right.address}}
+  />
+  {{#if @model.mapping.hasDerivation}}
+    {{#let @model.mapping.hasDerivation as |verification|}}
+      <div class="mt-5">
+        <h3>Manual verification</h3>
+        <div>
+          <p>Mapping is classified as <MappingPredicateBadge @predicate={{verification.predicate}} /> by {{verification.creator.name}}.</p>
+          <p class="text-muted small">{{verification.comment}}</p>
+        </div>
+      </div>
+    {{/let}}
+  {{else}}
+    <form>
+      <div class="form-group">
+        <label for="mapping-comment">Note</label>
+        <Textarea
+          id="mapping-comment"
+          @value={{this.mappingComment}}
+          rows="3"
+          class="form-control" />
+      </div>
+    </form>
+    <div class="mt-2">
+      <BsButton @type="success" @onClick={{this.confirmExactMatch}} class="mr-2">
+        Exact match
+      </BsButton>
+      <BsButton @type="warning" @onClick={{this.confirmRelatedMatch}} class="mx-2">
+        Related match
+      </BsButton>
+      <BsButton @type="danger" @onClick={{this.declineMatch}} class="ml-2">
+        Decline match
+      </BsButton>
+    </div>
+  {{/if}}
+{{else}}
+  <div class="mt-5">
+    <BsAlert @type="error" @dismissible={{false}}>
+      <strong>Something went wrong</strong> Mapping cannot be found.
+    </BsAlert>
+  </div>
+{{/if}}

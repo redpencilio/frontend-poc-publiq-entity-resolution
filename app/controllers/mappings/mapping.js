@@ -5,7 +5,7 @@ import constants from '../../constants';
 
 const { MAPPING_PREDICATES, MAPPING_JUSTIFICATIONS } = constants;
 
-export default class MappingsNextController extends Controller {
+export default class MappingsMappingController extends Controller {
   @service store;
   @service router;
 
@@ -13,17 +13,17 @@ export default class MappingsNextController extends Controller {
 
   confirmExactMatch = async () => {
     await this.createManualMapping(MAPPING_PREDICATES.EXACT);
-    this.router.refresh(this.router.currentRouteName);
+    this.router.transitionTo('mappings.next');
   };
 
   confirmRelatedMatch = async () => {
     await this.createManualMapping(MAPPING_PREDICATES.RELATED);
-    this.router.refresh(this.router.currentRouteName);
+    this.router.transitionTo('mappings.next');
   };
 
   declineMatch = async () => {
     await this.createManualMapping(MAPPING_PREDICATES.NONE);
-    this.router.refresh(this.router.currentRouteName);
+    this.router.transitionTo('mappings.next');
   };
 
   async createManualMapping(matchPredicate) {

@@ -18,6 +18,11 @@ export default class MappingsDoneController extends Controller {
   }
 
   @action
+  navigateToMapping(mapping) {
+    this.router.transitionTo('mappings.mapping', mapping.id);
+  }
+
+  @action
   previousPage() {
     this.selectPage(this.page - 1);
   }

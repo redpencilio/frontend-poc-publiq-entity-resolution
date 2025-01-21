@@ -6,6 +6,7 @@ const { ENTITY_TYPES } = constants;
 
 export default class MappingsNextRoute extends Route {
   @service store;
+  @service router;
 
   async model() {
     const mapping = await this.store.queryOne('mapping', {
@@ -19,24 +20,9 @@ export default class MappingsNextRoute extends Route {
       },
     });
     if (mapping) {
-      const [left, right] = await Promise.all([
-        this.store.queryOne('location', {
-          'filter[:uri:]': mapping.object,
-          include: 'address',
-        }),
-        this.store.queryOne('location', {
-          'filter[:uri:]': mapping.subject,
-          include: 'address',
-        }),
-      ]);
-      return { mapping, left, right };
+      this.router.transitionTo('mappings.mapping', mapping.id);
     } else {
-      return null;
+      this.router.transitionTo('mappings.outstanding');
     }
-  }
-
-  setupController(controller) {
-    super.setupController(...arguments);
-    controller.mappingComment = null;
   }
 }
