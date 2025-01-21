@@ -42,6 +42,7 @@ export default class MappingsMappingRoute extends Route {
           'subject-type': ENTITY_TYPES.LOCATION,
           'object-type': ENTITY_TYPES.LOCATION,
           justification: MAPPING_JUSTIFICATIONS.COMPOSITE,
+          ':has-no:predicate': true,
           ':has:has-derivation': true,
         },
       }),
@@ -50,6 +51,7 @@ export default class MappingsMappingRoute extends Route {
           'subject-type': ENTITY_TYPES.LOCATION,
           'object-type': ENTITY_TYPES.LOCATION,
           justification: MAPPING_JUSTIFICATIONS.COMPOSITE,
+          ':has-no:predicate': true,
         },
       }),
     ]);

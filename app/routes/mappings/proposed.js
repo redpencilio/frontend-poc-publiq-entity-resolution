@@ -23,6 +23,7 @@ export default class MappingsProposedRoute extends Route {
       filter: {
         'subject-type': ENTITY_TYPES.LOCATION,
         'object-type': ENTITY_TYPES.LOCATION,
+        ':has-no:predicate': true,
         ':has-no:has-derivation': true,
         justification: MAPPING_JUSTIFICATIONS.COMPOSITE,
       },
