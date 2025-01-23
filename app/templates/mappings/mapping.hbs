@@ -39,45 +39,48 @@
         <p>Mapping is automatically classified as <MappingPredicateBadge @predicate={{@model.mapping.predicate}} />.</p>
       </div>
     </div>
-  {{else if @model.mapping.hasDerivation}}
-    {{#let @model.mapping.hasDerivation as |manualMapping|}}
-      <div class="mt-5">
-        <h3>Manual match</h3>
-        <div>
-          <p>Mapping is classified as <MappingPredicateBadge @predicate={{manualMapping.predicate}} /> by {{manualMapping.creator.name}} on {{format-date manualMapping.created}}.</p>
-          <p class="text-muted small">{{manualMapping.comment}}</p>
-        </div>
-      </div>
-      <div>
-        <BsButton @type="danger" @size="sm" @onClick={{this.resetMatch}}>
-          Reset match
-        </BsButton>
-      </div>
-    {{/let}}
   {{else}}
     <div class="mt-5">
       <h3>Manual match</h3>
-      <form>
-        <div class="form-group">
-          <label for="mapping-comment">Note</label>
-          <Textarea
-            id="mapping-comment"
-            @value={{this.mappingComment}}
-            rows="3"
-            class="form-control" />
+      {{#if this.isSaving}}
+        <div class="mt-2 text-center">
+          <BsSpinner>Loading...</BsSpinner>
         </div>
-      </form>
-      <div class="mt-2">
-        <BsButton @type="success" @onClick={{this.confirmExactMatch}} class="mr-2">
-          Exact match
-        </BsButton>
-        <BsButton @type="warning" @onClick={{this.confirmRelatedMatch}} class="mx-2">
-          Related match
-        </BsButton>
-        <BsButton @type="danger" @onClick={{this.declineMatch}} class="ml-2">
-          Decline match
-        </BsButton>
-      </div>
+      {{else if @model.mapping.hasDerivation}}
+        {{#let @model.mapping.hasDerivation as |manualMapping|}}
+          <div>
+            <p>Mapping is classified as <MappingPredicateBadge @predicate={{manualMapping.predicate}} /> by {{manualMapping.creator.name}} on {{format-date manualMapping.created}}.</p>
+            <p class="text-muted small">{{manualMapping.comment}}</p>
+          </div>
+          <div>
+            <BsButton @type="danger" @size="sm" @onClick={{this.resetMatch}}>
+              Reset match
+            </BsButton>
+          </div>
+        {{/let}}
+      {{else}}
+        <form>
+          <div class="form-group">
+            <label for="mapping-comment">Note</label>
+            <Textarea
+              id="mapping-comment"
+              @value={{this.mappingComment}}
+              rows="3"
+              class="form-control" />
+          </div>
+        </form>
+        <div class="mt-2">
+          <BsButton @type="success" @onClick={{perform this.confirmExactMatch}} class="mr-2">
+            Exact match
+          </BsButton>
+          <BsButton @type="warning" @onClick={{perform this.confirmRelatedMatch}} class="mx-2">
+            Related match
+          </BsButton>
+          <BsButton @type="danger" @onClick={{perform this.declineMatch}} class="ml-2">
+            Decline match
+          </BsButton>
+        </div>
+      {{/if}}
     </div>
   {{/if}}
 {{else}}

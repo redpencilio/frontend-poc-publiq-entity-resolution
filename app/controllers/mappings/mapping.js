@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { task } from 'ember-concurrency';
 import constants from '../../constants';
 
 const { ENTITY_TYPES, MAPPING_PREDICATES, MAPPING_JUSTIFICATIONS } = constants;
@@ -11,21 +12,34 @@ export default class MappingsMappingController extends Controller {
 
   @tracked mappingComment;
   @tracked progress;
+  @tracked isLoadingModel;
 
-  confirmExactMatch = async () => {
-    await this.createManualMapping(MAPPING_PREDICATES.EXACT);
-    this.router.transitionTo('mappings.next');
-  };
+  get isSaving() {
+    return (
+      this.isLoadingModel ||
+      this.confirmExactMatch.isRunning ||
+      this.confirmRelatedMatch.isRunning ||
+      this.declineMatch.isRunning
+    );
+  }
 
-  confirmRelatedMatch = async () => {
-    await this.createManualMapping(MAPPING_PREDICATES.RELATED);
-    this.router.transitionTo('mappings.next');
-  };
+  @task
+  *confirmExactMatch() {
+    yield this.createManualMapping(MAPPING_PREDICATES.EXACT);
+    yield this.goToNextMapping();
+  }
 
-  declineMatch = async () => {
-    await this.createManualMapping(MAPPING_PREDICATES.NONE);
-    this.router.transitionTo('mappings.next');
-  };
+  @task
+  *confirmRelatedMatch() {
+    yield this.createManualMapping(MAPPING_PREDICATES.RELATED);
+    yield this.goToNextMapping();
+  }
+
+  @task
+  *declineMatch() {
+    yield this.createManualMapping(MAPPING_PREDICATES.NONE);
+    yield this.goToNextMapping();
+  }
 
   resetMatch = async () => {
     const manualMapping = await this.model.mapping.hasDerivation;
@@ -81,5 +95,24 @@ export default class MappingsMappingController extends Controller {
       derivedFrom: this.model.mapping,
     });
     await newMapping.save();
+  }
+
+  async goToNextMapping() {
+    const mapping = await this.store.queryOne('mapping', {
+      sort: '-score',
+      filter: {
+        'subject-type': ENTITY_TYPES.LOCATION,
+        'object-type': ENTITY_TYPES.LOCATION,
+        ':has-no:predicate': true,
+        ':has-no:has-derivation': true,
+        ':has-no:derived-from': true,
+      },
+    });
+
+    if (mapping) {
+      this.router.transitionTo('mappings.mapping', mapping.id);
+    } else {
+      this.router.transitionTo('mappings.outstanding');
+    }
   }
 }

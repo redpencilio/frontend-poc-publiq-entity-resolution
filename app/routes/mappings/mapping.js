@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default class MappingsMappingRoute extends Route {
   @service store;
@@ -42,5 +43,17 @@ export default class MappingsMappingRoute extends Route {
     super.setupController(...arguments);
     controller.mappingComment = null;
     controller.recalculateProgress();
+  }
+
+  @action
+  loading(transition) {
+    // eslint-disable-next-line ember/no-controller-access-in-routes
+    const controller = this.controllerFor(this.routeName);
+    controller.isLoadingModel = true;
+    transition.promise.finally(() => {
+      controller.isLoadingModel = false;
+    });
+
+    return false;
   }
 }
