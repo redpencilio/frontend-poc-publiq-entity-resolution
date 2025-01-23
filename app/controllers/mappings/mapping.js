@@ -3,7 +3,7 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import constants from '../../constants';
 
-const { MAPPING_PREDICATES, MAPPING_JUSTIFICATIONS } = constants;
+const { ENTITY_TYPES, MAPPING_PREDICATES, MAPPING_JUSTIFICATIONS } = constants;
 
 export default class MappingsMappingController extends Controller {
   @service store;
@@ -32,6 +32,32 @@ export default class MappingsMappingController extends Controller {
     await manualMapping.destroyRecord();
     this.router.refresh(this.router.currentRouteName);
   };
+
+  async recalculateProgress() {
+    const [doneCount, totalCount] = await Promise.all([
+      this.store.count('mapping', {
+        filter: {
+          'subject-type': ENTITY_TYPES.LOCATION,
+          'object-type': ENTITY_TYPES.LOCATION,
+          justification: MAPPING_JUSTIFICATIONS.COMPOSITE,
+          ':has-no:predicate': true,
+          ':has:has-derivation': true,
+        },
+      }),
+      this.store.count('mapping', {
+        filter: {
+          'subject-type': ENTITY_TYPES.LOCATION,
+          'object-type': ENTITY_TYPES.LOCATION,
+          justification: MAPPING_JUSTIFICATIONS.COMPOSITE,
+          ':has-no:predicate': true,
+        },
+      }),
+    ]);
+    this.progress = {
+      value: doneCount,
+      total: totalCount,
+    };
+  }
 
   async createManualMapping(matchPredicate) {
     const {

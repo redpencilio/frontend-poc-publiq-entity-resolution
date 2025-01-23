@@ -1,8 +1,5 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import constants from '../../constants';
-
-const { ENTITY_TYPES, MAPPING_JUSTIFICATIONS } = constants;
 
 export default class MappingsMappingRoute extends Route {
   @service store;
@@ -41,36 +38,9 @@ export default class MappingsMappingRoute extends Route {
     }
   }
 
-  async afterModel() {
-    const [doneCount, totalCount] = await Promise.all([
-      this.store.count('mapping', {
-        filter: {
-          'subject-type': ENTITY_TYPES.LOCATION,
-          'object-type': ENTITY_TYPES.LOCATION,
-          justification: MAPPING_JUSTIFICATIONS.COMPOSITE,
-          ':has-no:predicate': true,
-          ':has:has-derivation': true,
-        },
-      }),
-      this.store.count('mapping', {
-        filter: {
-          'subject-type': ENTITY_TYPES.LOCATION,
-          'object-type': ENTITY_TYPES.LOCATION,
-          justification: MAPPING_JUSTIFICATIONS.COMPOSITE,
-          ':has-no:predicate': true,
-        },
-      }),
-    ]);
-    this.doneCount = doneCount;
-    this.totalCount = totalCount;
-  }
-
   setupController(controller) {
     super.setupController(...arguments);
     controller.mappingComment = null;
-    controller.progress = {
-      value: this.doneCount,
-      total: this.totalCount,
-    };
+    controller.recalculateProgress();
   }
 }
