@@ -9,6 +9,7 @@
           <th scope="col">Entity 1</th>
           <th scope="col">Entity 2</th>
           <th scope="col">Score</th>
+          <th scope="col">Created</th>
         </tr>
       </thead>
       <tbody>
@@ -32,6 +33,9 @@
               </span>
             </td>
             <td class="align-middle">{{mapping.score}}</td>
+            <td class="align-middle text-muted small">
+              {{format-date mapping.created}}
+            </td>
           </tr>
         {{/each}}
       </tbody>

@@ -8,6 +8,7 @@
           <th scope="col" class="text-center">Score</th>
           <th scope="col">Entity 1</th>
           <th scope="col">Entity 2</th>
+          <th scope="col">Created</th>
           <th scope="col">{{!-- Buttons --}}</th>
         </tr>
       </thead>
@@ -27,9 +28,12 @@
                 <LocationSubline @uri={{mapping.subject}} />
               </span>
             </td>
+            <td class="align-middle text-muted small">
+              {{format-date mapping.created}}
+            </td>
             <td class="align-middle small">
               <LinkTo @route="mappings.mapping" @model={{mapping.id}}>
-                Verifieer
+                Open
               </LinkTo>
             </td>
           </tr>

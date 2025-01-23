@@ -21,6 +21,11 @@
   {{/if}}
   <div class="badge bg-primary">Score: {{@model.mapping.score}}</div>
 </div>
+{{#if @model.mapping.created}}
+  <div class="mt-n1 mb-2 small text-muted">
+    Created at {{format-date @model.mapping.created}}
+  </div>
+{{/if}}
 
 {{#if @model}}
   <AddressComparisonTable
@@ -39,7 +44,7 @@
       <div class="mt-5">
         <h3>Manual match</h3>
         <div>
-          <p>Mapping is classified as <MappingPredicateBadge @predicate={{manualMapping.predicate}} /> by {{manualMapping.creator.name}}.</p>
+          <p>Mapping is classified as <MappingPredicateBadge @predicate={{manualMapping.predicate}} /> by {{manualMapping.creator.name}} on {{format-date manualMapping.created}}.</p>
           <p class="text-muted small">{{manualMapping.comment}}</p>
         </div>
       </div>

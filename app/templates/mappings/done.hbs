@@ -54,7 +54,13 @@
               </span>
             </td>
             <td class="align-middle">{{mapping.derivedFrom.score}}</td>
-            <td class="align-middle">{{mapping.creator.name}}</td>
+            <td class="align-middle small">
+              <span>{{mapping.creator.name}}</span>
+              {{#if mapping.created}}
+                <br>
+                <span class="text-muted">on {{format-date mapping.created}}</span>
+              {{/if}}
+            </td>
             <td class="align-middle text-muted small">{{mapping.comment}}</td>
           </tr>
         {{/each}}
