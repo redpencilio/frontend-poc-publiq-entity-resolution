@@ -7,21 +7,50 @@
   {{#if this.session.isAuthenticated}}
     <navbar.content>
       <navbar.nav as |nav|>
-        <nav.item>
-          <nav.link-to @route="mappings.location.proposed" class="fw-medium">
-            Proposed mappings
-          </nav.link-to>
-        </nav.item>
-        <nav.item>
-          <nav.link-to @route="mappings.location.done" class="fw-medium">
-            Verified mappings
-          </nav.link-to>
-        </nav.item>
-        <nav.item>
-          <nav.link-to @route="mappings.location.auto" class="fw-medium">
-            Automatic mappings
-          </nav.link-to>
-        </nav.item>
+        <nav.dropdown as |dd|>
+          <dd.toggle class="fw-medium">
+            Location mappings <span class="caret"></span>
+          </dd.toggle>
+          <dd.menu as |ddm|>
+            <ddm.item>
+              <ddm.link-to @route="mappings.location.proposed">
+                Proposed mappings
+              </ddm.link-to>
+            </ddm.item>
+            <ddm.item>
+              <ddm.link-to @route="mappings.location.done">
+                Verified mappings
+              </ddm.link-to>
+            </ddm.item>
+            <ddm.item>
+              <ddm.link-to @route="mappings.location.auto">
+                Automatic mappings
+              </ddm.link-to>
+            </ddm.item>
+          </dd.menu>
+        </nav.dropdown>
+        <nav.dropdown as |dd|>
+          <dd.toggle class="fw-medium">
+            Generic mappings <span class="caret"></span>
+          </dd.toggle>
+          <dd.menu as |ddm|>
+            <ddm.item>
+              <ddm.link-to @route="mappings.generic.proposed">
+                Proposed mappings
+              </ddm.link-to>
+            </ddm.item>
+            <ddm.item>
+              <ddm.link-to @route="mappings.generic.done">
+                Verified mappings
+              </ddm.link-to>
+            </ddm.item>
+            <ddm.item>
+              <ddm.link-to @route="mappings.generic.auto">
+                Automatic mappings
+              </ddm.link-to>
+            </ddm.item>
+          </dd.menu>
+        </nav.dropdown>
       </navbar.nav>
     </navbar.content>
     <div class="text-white">
