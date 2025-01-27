@@ -1,0 +1,106 @@
+{{#unless @model.hasMatchPredicate}}
+  <div class="mb-2">
+    <BsProgress as |Progress|>
+      <Progress.bar
+        @value={{this.progress.value}}
+        @minValue={{0}}
+        @maxValue={{this.progress.total}}
+        @showLabel={{true}} />
+    </BsProgress>
+    <div class="text-end small text-muted">
+      {{this.progress.value}}/{{this.progress.total}}
+    </div>
+  </div>
+{{/unless}}
+
+<div class="d-flex gap-2 align-items-center">
+  {{#if @model.hasMatchPredicate}}
+    <h2>Mapping</h2>
+  {{else}}
+    <h2>Proposed mapping</h2>
+  {{/if}}
+  <div class="badge bg-primary">Score: {{@model.mapping.score}}</div>
+</div>
+{{#if @model.mapping.created}}
+  <div class="mt-n1 mb-2 small text-muted">
+    Created at {{format-date @model.mapping.created}}
+  </div>
+{{/if}}
+
+{{#if @model}}
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Label</th>
+        <th scope="col">Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{@model.mapping.subjectType}}</td>
+        <td>{{@model.mapping.subjectLabel}}</td>
+      </tr>
+      <tr>
+        <td>{{@model.mapping.objectType}}</td>
+        <td>{{@model.mapping.objectLabel}}</td>
+      </tr>
+    </tbody>
+  </table>
+  {{#if @model.mapping.predicate}}
+    <div class="mt-5">
+      <h3>Automatic match</h3>
+      <div>
+        <p>Mapping is automatically classified as <MappingPredicateBadge @predicate={{@model.mapping.predicate}} />.</p>
+      </div>
+    </div>
+  {{else}}
+    <div class="mt-5">
+      <h3>Manual match</h3>
+      {{#if this.isSaving}}
+        <div class="mt-2 text-center">
+          <BsSpinner>Loading...</BsSpinner>
+        </div>
+      {{else if @model.mapping.hasDerivation}}
+        {{#let @model.mapping.hasDerivation as |manualMapping|}}
+          <div>
+            <p>Mapping is classified as <MappingPredicateBadge @predicate={{manualMapping.predicate}} /> by {{manualMapping.creator.name}} on {{format-date manualMapping.created}}.</p>
+            <p class="text-muted small">{{manualMapping.comment}}</p>
+          </div>
+          <div>
+            <BsButton @type="danger" @size="sm" @onClick={{this.resetMatch}}>
+              Reset match
+            </BsButton>
+          </div>
+        {{/let}}
+      {{else}}
+        <form>
+          <div class="form-group">
+            <label for="mapping-comment">Note</label>
+            <Textarea
+              id="mapping-comment"
+              @value={{this.mappingComment}}
+              rows="3"
+              class="form-control" />
+          </div>
+        </form>
+        <div class="mt-2">
+          <BsButton @type="success" @onClick={{perform this.confirmExactMatch}} class="mr-2">
+            Exact match
+          </BsButton>
+          <BsButton @type="warning" @onClick={{perform this.confirmRelatedMatch}} class="mx-2">
+            Related match
+          </BsButton>
+          <BsButton @type="danger" @onClick={{perform this.declineMatch}} class="ml-2">
+            Decline match
+          </BsButton>
+        </div>
+      {{/if}}
+    </div>
+  {{/if}}
+{{else}}
+  <div class="mt-5">
+    <BsAlert @type="error" @dismissible={{false}}>
+      <strong>Something went wrong</strong> Mapping cannot be found.
+    </BsAlert>
+  </div>
+{{/if}}

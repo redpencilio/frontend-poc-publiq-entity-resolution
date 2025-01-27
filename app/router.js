@@ -10,6 +10,12 @@ Router.map(function () {
   this.route('login');
   this.route('sparql');
   this.route('mappings', function () {
+    this.route('generic', { path: '' }, function () {
+      this.route('proposed');
+      this.route('mapping', { path: '/:mapping_id' });
+      this.route('done');
+      this.route('auto');
+    });
     this.route('location', function () {
       this.route('proposed');
       this.route('mapping', { path: '/:mapping_id' });
