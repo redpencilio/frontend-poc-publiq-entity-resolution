@@ -2,11 +2,11 @@ import Controller from '@ember/controller';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
-import constants from '../../constants';
+import constants from '../../../constants';
 
 const { ENTITY_TYPES, MAPPING_PREDICATES, MAPPING_JUSTIFICATIONS } = constants;
 
-export default class MappingsMappingController extends Controller {
+export default class MappingsLocationMappingController extends Controller {
   @service store;
   @service router;
 
@@ -110,9 +110,9 @@ export default class MappingsMappingController extends Controller {
     });
 
     if (mapping) {
-      this.router.transitionTo('mappings.mapping', mapping.id);
+      this.router.transitionTo('mappings.location.mapping', mapping.id);
     } else {
-      this.router.transitionTo('mappings.outstanding');
+      this.router.transitionTo('mappings.location.outstanding');
     }
   }
 }

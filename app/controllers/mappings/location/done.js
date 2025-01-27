@@ -3,16 +3,23 @@ import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
-export default class MappingsAutoController extends Controller {
+export default class MappingsLocationDoneController extends Controller {
   @service router;
 
   @tracked page = 0;
   @tracked size = 50;
-  @tracked sort = '-created';
+  @tracked sort = '-derived-from.score';
+  @tracked matchPredicate;
+
+  @action
+  setMatchPredicate(value) {
+    this.matchPredicate = value;
+    this.page = 0;
+  }
 
   @action
   navigateToMapping(mapping) {
-    this.router.transitionTo('mappings.mapping', mapping.id);
+    this.router.transitionTo('mappings.location.mapping', mapping.id);
   }
 
   @action

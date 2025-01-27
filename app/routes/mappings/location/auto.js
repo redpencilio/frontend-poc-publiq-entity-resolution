@@ -1,10 +1,10 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
-import constants from '../../constants';
+import constants from '../../../constants';
 
-const { ENTITY_TYPES, MAPPING_JUSTIFICATIONS } = constants;
+const { MAPPING_PREDICATES, ENTITY_TYPES, MAPPING_JUSTIFICATIONS } = constants;
 
-export default class MappingsProposedRoute extends Route {
+export default class MappingsLocationAutoRoute extends Route {
   @service store;
 
   queryParams = {
@@ -23,7 +23,7 @@ export default class MappingsProposedRoute extends Route {
       filter: {
         'subject-type': ENTITY_TYPES.LOCATION,
         'object-type': ENTITY_TYPES.LOCATION,
-        ':has-no:predicate': true,
+        predicate: MAPPING_PREDICATES.EXACT,
         ':has-no:has-derivation': true,
         justification: MAPPING_JUSTIFICATIONS.COMPOSITE,
       },

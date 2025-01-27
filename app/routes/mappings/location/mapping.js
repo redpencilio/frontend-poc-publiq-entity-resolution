@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { action } from '@ember/object';
 
-export default class MappingsMappingRoute extends Route {
+export default class MappingsLocationMappingRoute extends Route {
   @service store;
   @service router;
 
@@ -13,7 +13,10 @@ export default class MappingsMappingRoute extends Route {
     if (mapping) {
       const originalMapping = await mapping.derivedFrom;
       if (originalMapping) {
-        this.router.transitionTo('mappings.mapping', originalMapping.id);
+        this.router.transitionTo(
+          'mappings.location.mapping',
+          originalMapping.id,
+        );
         return;
       } else {
         const [left, right] = await Promise.all([
